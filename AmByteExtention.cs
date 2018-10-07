@@ -7,10 +7,12 @@ namespace am
 public static class AmByteExtention
 {
     
-    public static void Memcpy(this byte[] dst, byte dst){	
-	fixed(byte *dst = &dstBuf.data[dstBuf.position]){
-	    fixed(byte *src = &srcBuf.data[srcBuf.position])
-	    {		
+    unsafe public static void Memcpy(this byte[] dstBuf, byte[] srcBuf, int bufSize){
+	int size = bufSize;
+	fixed(byte *dst = &dstBuf[0])
+	{
+	    fixed(byte *src = &srcBuf[0])
+	    {
 		for (int idx = 0; idx < size; ++idx){
 		    dst[idx] = src[idx];
 		}
